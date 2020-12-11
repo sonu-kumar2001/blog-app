@@ -2,7 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
-const Article = require("./models/article");
+const path = require("path");
 
 //connecting to database
 mongoose.connect("mongodb://localhost/blog",{ useNewUrlParser: true, useUnifiedTopology: true},(err)=> {
@@ -16,11 +16,12 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
-//Routes
-app.get("/",(req,res)=> {
-    res.send("welcome to blog app");
-})
+//views
+app.set("view engine","ejs");
+app.set("views",path.join(__dirname, "views"));
+//routing middleware
+app.use("/",require("./routes/index"));
+app.use("/article",require("./routes/article"));
 
 //error handler middlewares
 
@@ -31,7 +32,7 @@ app.use((req,res,next)=> {
 
 //custom error handler middleware
 app.use((err,req,res,next)=> {
-    next(err);
+    res.json(err);
 })
 
 //listener port

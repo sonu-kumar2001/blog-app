@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2><%= article.title%></h2>
+    <p><%= article.description%></p>
+    <h4><%= article.tags%></h4>
+    <h4><%= article.likes%></h4>
+
+    <a href="/article/<%= article.id%>/edit">edit</a>
+    <a href="/article/<%= article.id%>/delete">delete</a>
+    <a href="/">Back</a>
+</body>
+</html>
