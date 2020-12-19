@@ -7,7 +7,10 @@ const articleSchema = new Schema({
     description: {type:String,minlength: 5},
     tags: [{type:String}],
     likes: {type: Number,default:0},
-    published: {type: String,default:false}
+    published: {type: String,default:false},
+    comments: [{
+        type: Schema.Types.ObjectId,ref: "Comment"
+    }]
 },{timestamps: true});
 
 const Article = mongoose.model("Article",articleSchema);

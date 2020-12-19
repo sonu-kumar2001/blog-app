@@ -14,5 +14,16 @@
     <a href="/article/<%= article.id%>/edit">edit</a>
     <a href="/article/<%= article.id%>/delete">delete</a>
     <a href="/">Back</a>
+
+    <form action="/article/<%= article.id%>/comments" method="POST">
+        <input type="text" name="text" placeholder="Comments">
+        <input type="text" name="author" placeholder="Author">
+        <input type="submit" value="Add Comments">
+    </form>
+
+   <% article.comments.forEach(c => { %>
+        <h3><%= c.author%></h3>
+        <p><%= c.text%></p>
+   <% }) %>
 </body>
 </html>
