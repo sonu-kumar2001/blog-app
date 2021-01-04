@@ -22,6 +22,7 @@ app.set("views",path.join(__dirname, "views"));
 //routing middleware
 app.use("/",require("./routes/index"));
 app.use("/article",require("./routes/article"));
+app.use("/users",require("./routes/user"));
 
 //error handler middlewares
 

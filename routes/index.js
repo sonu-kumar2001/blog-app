@@ -7,6 +7,7 @@ const Article = require("../models/Article");
 // router.get("/",(req,res)=> {
 //     res.render('index');
 // });
+
 router.get("/",(req,res,next)=> {
     Article.find({},(err,articles)=> {
         if(err) return next(err);
