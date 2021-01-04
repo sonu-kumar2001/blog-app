@@ -3,7 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require("path");
-
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 //connecting to database
 mongoose.connect("mongodb://localhost/blog",{ useNewUrlParser: true, useUnifiedTopology: true},(err)=> {
     console.log(err ? err : "connected to database");
@@ -16,6 +18,14 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
+app.use(session({
+    secret: "any random text",
+    saveUninitialized : true,
+    resave: true,
+    name: "userId",
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
 //views
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname, "views"));
