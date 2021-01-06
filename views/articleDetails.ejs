@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+
+    <header>
+        <% if(user) { %>
+            <h3><%= user.name%></h3>
+            <a href="/users/logout">logout</a>
+        <% } else { %>
+            <a href="/users/login">login</a>
+            <a href="/users/register">register</a>
+        <% } %>
+    </header>
+
     <h2><%= article.title%></h2>
     <p><%= article.description%></p>
     <h4><%= article.tags%></h4>
